@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Student Robotics Editor</title>
+
+    <link href="/static/styles.css" rel="stylesheet" />
+
+    <link href="/static/octicons/octicons.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <xml id="toolbox" style="display: none">
+      <block type="robot_move"></block>
+      <block type="robot_turn"></block>
+      <block type="repeat"></block>
+      <block type="wait"></block>
+    </xml>
+
+    <header class="header">
+      <h1>Programming Robots</h1>
+
+      <button id="go"><span class="mega-octicon octicon-beaker"></span></button>
+    </header>
+
+    <main class="workspace" id="workspace">
+      <!-- Blocky Workspace is injected here. -->
+    </main>
+
+    <form id="form" method="POST" action="/code">
+      <input id="code" type="hidden" name="code" />
+    </form>
+
+    <script src="/static/blockly/blockly_compressed.js"></script>
+    <script src="/static/blockly/blocks_compressed.js"></script>
+    <script src="/static/blockly/python_compressed.js"></script>
+    <script src="/static/blockly/msg/js/en.js"></script>
+
+    <script src="/static/main.js"></script>
+  </body>
+</html>

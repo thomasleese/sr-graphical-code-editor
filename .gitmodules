@@ -1,3 +1,6 @@
 [submodule "blockly"]
-	path = blockly
+	path = static/blockly
 	url = https://github.com/google/blockly.git
+[submodule "zip-packager"]
+	path = zip-packager
+	url = https://studentrobotics.org/cgit/brain/zip-packager.git

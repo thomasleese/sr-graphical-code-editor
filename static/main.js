@@ -20,8 +20,19 @@
     var dropdown_direction = block.getFieldValue('direction');
     var dropdown_speed = block.getFieldValue('speed');
     var text_duration = block.getFieldValue('duration');
-    // TODO: Assemble Python into code variable.
-    var code = '...\n';
+
+    var power = 40;
+    if (dropdown_speed === 'fast') {
+      power = 65;
+    }
+
+    if (dropdown_direction === 'backwards') {
+      power = -power;
+    }
+
+    var code = 'R.motors[0].m0.power = ' + power + '\n' +
+               'R.motors[0].m1.power = ' + power + '\n' +
+               'time.sleep(' + text_duration + ')\n';
     return code;
   };
 
@@ -44,9 +55,19 @@
     var dropdown_direction = block.getFieldValue('direction');
     var dropdown_speed = block.getFieldValue('speed');
     var text_duration = block.getFieldValue('duration');
-    // TODO: Assemble Python into code variable.
-    var code = 'R.motors[0].m0.power = 50;\n'
-               'R.motors[0].m1.power = 50;\n';
+
+    var power = 40;
+    if (dropdown_speed === 'fast') {
+      power = 65;
+    }
+
+    if (dropdown_direction === 'right') {
+      power = -power;
+    }
+
+    var code = 'R.motors[0].m0.power = ' + -power + '\n' +
+               'R.motors[0].m1.power = ' + power + '\n' +
+               'time.sleep(' + text_duration + ')\n';
     return code;
   };
 
@@ -67,8 +88,14 @@
   Blockly.Python['repeat'] = function(block) {
     var text_times = block.getFieldValue('times');
     var statements_body = Blockly.Python.statementToCode(block, 'body');
-    // TODO: Assemble Python into code variable.
+
     var code = 'for i in range(' + text_times + '):\n';
+
+    var lines = statements_body.split('\n');
+    lines.forEach(function(line) {
+      code += '    ' + line + '\n';
+    });
+
     return code;
   };
 
@@ -87,15 +114,31 @@
 
   Blockly.Python['wait'] = function(block) {
     var text_duration = block.getFieldValue('duration');
-    // TODO: Assemble Python into code variable.
     var code = 'time.sleep(' + text_duration + ')\n';
     return code;
   };
 
   var $toolbox = document.querySelector('#toolbox');
+  var $go = document.querySelector('#go');
+  var $form = document.querySelector('#form');
+  var $code = document.querySelector('#code');
 
   var workspace = Blockly.inject('workspace', {
     toolbox: $toolbox,
     trashcan: true
   });
+
+  $go.onclick = function() {
+    var code = Blockly.Python.workspaceToCode(workspace);
+
+    code = 'import time\n' +
+           'import sr.robot\n\n' +
+           'R = sr.robot.Robot()\n\n' + code;
+
+    console.log(code);
+
+    $code.value = code;
+
+    $form.submit();
+  };
 }());

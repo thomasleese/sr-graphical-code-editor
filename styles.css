@@ -1,0 +1,50 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    flex: 0 0 auto;
+
+    background: #253571;
+    color: white;
+
+    display: flex;
+}
+
+.header h1 {
+    flex: 1 1 auto;
+    margin: 0;
+    padding: 1rem;
+    font-family: monospace;
+    font-weight: normal;
+}
+
+.header button {
+    background: #253571;
+    color: white;
+    border: none;
+    width: 3.5rem;
+    margin: 0.2rem;
+}
+
+.header button:hover {
+    background: #19244d;
+}
+
+.header button:active {
+    background: #0c1227;
+}
+
+.workspace {
+    flex: 1 1 auto;
+}
